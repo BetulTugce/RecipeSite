@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Dbo_RecipeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Dbo_Recipe.dbo.TBL_ABOUTUS' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TBL_ABOUTUS">
+          <Property Name="TEXT" Type="varchar" MaxLength="500" />
+        </EntityType>-->
+  <EntityType Name="TBL_ADMIN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TBL_CATEGORIES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="QUANTITY" Type="smallint" />
+  </EntityType>
+  <EntityType Name="TBL_COMMENTS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="MAIL" Type="varchar" MaxLength="50" />
+    <Property Name="DATE" Type="smalldatetime" />
+    <Property Name="CONFIRMATION" Type="bit" />
+    <Property Name="COMMENT" Type="varchar" MaxLength="500" />
+    <Property Name="RECIPEID" Type="smallint" />
+  </EntityType>
+  <EntityType Name="TBL_FOODS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="INGREDIENTS" Type="varchar" MaxLength="500" />
+    <Property Name="METHOD" Type="varchar(max)" />
+    <Property Name="IMAGE" Type="varchar" MaxLength="100" />
+    <Property Name="DATE" Type="smalldatetime" />
+    <Property Name="POINT" Type="tinyint" />
+    <Property Name="CATEGORYID" Type="smallint" />
+    <Property Name="STATE" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dbo_Recipe.dbo.TBL_MESSAGES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TBL_MESSAGES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="TITLE" Type="varchar" MaxLength="30" />
+    <Property Name="MAIL" Type="varchar" MaxLength="50" />
+    <Property Name="MESSAGE" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TBL_RECIPES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="INGREDIENTS" Type="varchar" MaxLength="500" />
+    <Property Name="METHOD" Type="varchar(max)" />
+    <Property Name="IMAGE" Type="varchar" MaxLength="50" />
+    <Property Name="OWNER" Type="varchar" MaxLength="50" />
+    <Property Name="MAIL" Type="varchar" MaxLength="50" />
+    <Property Name="STATE" Type="bit" />
+  </EntityType>
+  <Association Name="FK_TBL_COMMENTS_TBL_FOODS">
+    <End Role="TBL_FOODS" Type="Self.TBL_FOODS" Multiplicity="0..1" />
+    <End Role="TBL_COMMENTS" Type="Self.TBL_COMMENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_FOODS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_COMMENTS">
+        <PropertyRef Name="RECIPEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_FOODS_TBL_CATEGORIES">
+    <End Role="TBL_CATEGORIES" Type="Self.TBL_CATEGORIES" Multiplicity="0..1" />
+    <End Role="TBL_FOODS" Type="Self.TBL_FOODS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_CATEGORIES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_FOODS">
+        <PropertyRef Name="CATEGORYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Dbo_RecipeModelStoreContainer">
+    <EntitySet Name="TBL_ADMIN" EntityType="Self.TBL_ADMIN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_CATEGORIES" EntityType="Self.TBL_CATEGORIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_COMMENTS" EntityType="Self.TBL_COMMENTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_FOODS" EntityType="Self.TBL_FOODS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_RECIPES" EntityType="Self.TBL_RECIPES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_MESSAGES" EntityType="Self.TBL_MESSAGES" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TBL_MESSAGES].[ID] AS [ID], 
+    [TBL_MESSAGES].[NAME] AS [NAME], 
+    [TBL_MESSAGES].[TITLE] AS [TITLE], 
+    [TBL_MESSAGES].[MAIL] AS [MAIL], 
+    [TBL_MESSAGES].[MESSAGE] AS [MESSAGE]
+    FROM [dbo].[TBL_MESSAGES] AS [TBL_MESSAGES]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_TBL_COMMENTS_TBL_FOODS" Association="Self.FK_TBL_COMMENTS_TBL_FOODS">
+      <End Role="TBL_FOODS" EntitySet="TBL_FOODS" />
+      <End Role="TBL_COMMENTS" EntitySet="TBL_COMMENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_FOODS_TBL_CATEGORIES" Association="Self.FK_TBL_FOODS_TBL_CATEGORIES">
+      <End Role="TBL_CATEGORIES" EntitySet="TBL_CATEGORIES" />
+      <End Role="TBL_FOODS" EntitySet="TBL_FOODS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

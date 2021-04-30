@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Dbo_RecipeModelStoreContainer" CdmEntityContainer="Dbo_RecipeEntities5">
+    <EntitySetMapping Name="TBL_ADMIN">
+      <EntityTypeMapping TypeName="Dbo_RecipeModel.TBL_ADMIN">
+        <MappingFragment StoreEntitySet="TBL_ADMIN">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CATEGORIES">
+      <EntityTypeMapping TypeName="Dbo_RecipeModel.TBL_CATEGORIES">
+        <MappingFragment StoreEntitySet="TBL_CATEGORIES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_COMMENTS">
+      <EntityTypeMapping TypeName="Dbo_RecipeModel.TBL_COMMENTS">
+        <MappingFragment StoreEntitySet="TBL_COMMENTS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="CONFIRMATION" ColumnName="CONFIRMATION" />
+          <ScalarProperty Name="COMMENT" ColumnName="COMMENT" />
+          <ScalarProperty Name="RECIPEID" ColumnName="RECIPEID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_FOODS">
+      <EntityTypeMapping TypeName="Dbo_RecipeModel.TBL_FOODS">
+        <MappingFragment StoreEntitySet="TBL_FOODS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="INGREDIENTS" ColumnName="INGREDIENTS" />
+          <ScalarProperty Name="METHOD" ColumnName="METHOD" />
+          <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="POINT" ColumnName="POINT" />
+          <ScalarProperty Name="CATEGORYID" ColumnName="CATEGORYID" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_RECIPES">
+      <EntityTypeMapping TypeName="Dbo_RecipeModel.TBL_RECIPES">
+        <MappingFragment StoreEntitySet="TBL_RECIPES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="INGREDIENTS" ColumnName="INGREDIENTS" />
+          <ScalarProperty Name="METHOD" ColumnName="METHOD" />
+          <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+          <ScalarProperty Name="OWNER" ColumnName="OWNER" />
+          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_MESSAGES">
+      <EntityTypeMapping TypeName="Dbo_RecipeModel.TBL_MESSAGES">
+        <MappingFragment StoreEntitySet="TBL_MESSAGES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+          <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

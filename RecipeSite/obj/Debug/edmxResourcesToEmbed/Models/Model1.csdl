@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Dbo_RecipeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBL_ADMIN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBL_CATEGORIES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QUANTITY" Type="Int16" />
+    <NavigationProperty Name="TBL_FOODS" Relationship="Self.FK_TBL_FOODS_TBL_CATEGORIES" FromRole="TBL_CATEGORIES" ToRole="TBL_FOODS" />
+  </EntityType>
+  <EntityType Name="TBL_COMMENTS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DATE" Type="DateTime" Precision="0" />
+    <Property Name="CONFIRMATION" Type="Boolean" />
+    <Property Name="COMMENT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="RECIPEID" Type="Int16" />
+    <NavigationProperty Name="TBL_FOODS" Relationship="Self.FK_TBL_COMMENTS_TBL_FOODS" FromRole="TBL_COMMENTS" ToRole="TBL_FOODS" />
+  </EntityType>
+  <EntityType Name="TBL_FOODS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="INGREDIENTS" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="METHOD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DATE" Type="DateTime" Precision="0" />
+    <Property Name="POINT" Type="Byte" />
+    <Property Name="CATEGORYID" Type="Int16" />
+    <Property Name="STATE" Type="Boolean" />
+    <NavigationProperty Name="TBL_CATEGORIES" Relationship="Self.FK_TBL_FOODS_TBL_CATEGORIES" FromRole="TBL_FOODS" ToRole="TBL_CATEGORIES" />
+    <NavigationProperty Name="TBL_COMMENTS" Relationship="Self.FK_TBL_COMMENTS_TBL_FOODS" FromRole="TBL_FOODS" ToRole="TBL_COMMENTS" />
+  </EntityType>
+  <EntityType Name="TBL_RECIPES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="INGREDIENTS" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="METHOD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OWNER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="STATE" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TBL_MESSAGES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TITLE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MESSAGE" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_TBL_FOODS_TBL_CATEGORIES">
+    <End Role="TBL_CATEGORIES" Type="Self.TBL_CATEGORIES" Multiplicity="0..1" />
+    <End Role="TBL_FOODS" Type="Self.TBL_FOODS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_CATEGORIES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_FOODS">
+        <PropertyRef Name="CATEGORYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_COMMENTS_TBL_FOODS">
+    <End Role="TBL_FOODS" Type="Self.TBL_FOODS" Multiplicity="0..1" />
+    <End Role="TBL_COMMENTS" Type="Self.TBL_COMMENTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_FOODS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_COMMENTS">
+        <PropertyRef Name="RECIPEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Dbo_RecipeEntities5" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBL_ADMIN" EntityType="Self.TBL_ADMIN" />
+    <EntitySet Name="TBL_CATEGORIES" EntityType="Self.TBL_CATEGORIES" />
+    <EntitySet Name="TBL_COMMENTS" EntityType="Self.TBL_COMMENTS" />
+    <EntitySet Name="TBL_FOODS" EntityType="Self.TBL_FOODS" />
+    <EntitySet Name="TBL_RECIPES" EntityType="Self.TBL_RECIPES" />
+    <EntitySet Name="TBL_MESSAGES" EntityType="Self.TBL_MESSAGES" />
+    <AssociationSet Name="FK_TBL_FOODS_TBL_CATEGORIES" Association="Self.FK_TBL_FOODS_TBL_CATEGORIES">
+      <End Role="TBL_CATEGORIES" EntitySet="TBL_CATEGORIES" />
+      <End Role="TBL_FOODS" EntitySet="TBL_FOODS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_COMMENTS_TBL_FOODS" Association="Self.FK_TBL_COMMENTS_TBL_FOODS">
+      <End Role="TBL_FOODS" EntitySet="TBL_FOODS" />
+      <End Role="TBL_COMMENTS" EntitySet="TBL_COMMENTS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
