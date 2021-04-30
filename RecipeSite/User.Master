@@ -1,0 +1,79 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="RecipeSite.User" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="StyleSheet.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+
+        .auto-style2 {
+            text-align: center;
+            font-weight: bold;
+            color: #FFFFFF;
+            height: 23px;
+        }
+
+        .auto-style4 {
+            color: #333333;
+        }
+        .auto-style5 {
+            text-align: center;
+            font-weight: bold;
+            color: #333333;
+            height: 23px;
+        }
+        .auto-style6 {
+            font-size: medium;
+        }
+        .auto-style7 {
+            font-size: medium;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="height: 150px; width: 700px; margin-left: 300px; background-color: #003399;">
+            <asp:Image ID="Image1" runat="server" Height="150px" ImageUrl="~/Banner/header2.jpg" Width="700px" />
+        </div>
+        <div style="margin-left: 300px; width: 700px; height: 20px;"></div>
+        <div style="margin-left: 300px; width: 700px; height: 30px; background-color: white;">
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style2"><a href="HomePage.aspx"><span class="auto-style4">ANA SAYFA</span></a></td>
+                    <td class="auto-style2"><a href="Special.aspx"><span class="auto-style4">GÜNÜN YEMEĞİ</span></a></td>
+                    <td class="auto-style5"><a href="Suggest.aspx"><span class="auto-style4">TARİF ÖNER</span></a></td>
+                    <td class="auto-style2"><a href="AboutUs.aspx"><span class="auto-style4">HAKKIMIZDA</span></a></td>
+                    <td class="auto-style2"><a href="Contact.aspx"><span class="auto-style4">İLETİŞİM</span></a></td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-left: 300px; width: 700px; height: 20px;"></div>
+        <div style="margin-left: 300px; width: 700px; height: 300px;">
+            <div style="width: 166px; float:left; height: auto; background-color:#003399; color: #FFFFFF;">
+                <asp:DataList ID="DataList1" runat="server" CellPadding="10" CellSpacing="10" GridLines="Both" style="font-size: large; text-align: center; margin-bottom: 0px">
+                    <ItemTemplate>
+                        <a href="CategoryDetails.aspx?ID=<%#Eval("ID") %>"> <asp:Label ID="Label1" runat="server" Text='<%# Eval("NAME") %>' CssClass="auto-style7"></asp:Label></a>
+                        <span class="auto-style6">&nbsp;( </span>
+                        <asp:Label ID="Label2" runat="server" CssClass="auto-style6" Text='<%# Eval("QUANTITY") %>'></asp:Label>
+                        )
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+            <div style="width: 514px; float:left; height: auto; margin-left:20px;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <p>
+                    </p>
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
